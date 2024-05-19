@@ -1,4 +1,5 @@
 // We will see 2 cycle penalty for both EMPTY and FULL flag because of 2 Flop Syncronization
+// Make sure to change the DEPTH in all the files, and TB
 
 module Asynchronous_FIFO #(parameter DEPTH=8, DATA_WIDTH=6)
 (wr_clk, rd_clk, rst_n, wr_en, rd_en, wr_ptr, rd_ptr, data_in, data_out, FULL, EMPTY);
