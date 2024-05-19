@@ -16,11 +16,16 @@ output FULL, EMPTY;
 
 wire [ptr_bits:0] rd_ptr_wrclk_gray, wr_ptr_gray, wr_ptr_rdclk_gray, rd_ptr_gray;
 
-
+// Generating Full condition and B2G, G2B conversion
 write_ckt #(DEPTH) write0 (rd_ptr_wrclk_gray, wr_ptr, wr_ptr_gray, FULL);
+
+// Sending Gray encoded Binary wr_ptr into rd_clk domain
 Synchronizer #(DEPTH) Sync_wr (rst_n, wr_ptr_gray, rd_clk, wr_ptr_rdclk_gray);
 
+// Generating Empty condition and B2G, G2B conversion
 read_ckt #(DEPTH) read0 (wr_ptr_rdclk_gray, rd_ptr, rd_ptr_gray, EMPTY);
+
+// Sending Gray encoded Binary rd_ptr into wr_clk domain
 Synchronizer #(DEPTH) Sync_rd (rst_n, rd_ptr_gray, wr_clk, rd_ptr_wrclk_gray);
 
 // WRITE
